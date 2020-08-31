@@ -1,6 +1,8 @@
 <?php
 include(__DIR__ . "/../bootstrap/start.php");
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, "/../");
+$dotenv->load();
+include(__DIR__ . "/../bootstrap/db.php");
 include(__DIR__ . "/../routes.php");
 
 $match = $router->match();

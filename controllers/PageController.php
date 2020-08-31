@@ -26,31 +26,31 @@ class PageController {
 		include(__DIR__ . "/../views/login.php");
 	}
 
-	public function getTestDB(){
-		$options = array(
-			PDO::ATTR_PERSISTENT => true,
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-		);
-		try {
-			$conn = new PDO("mysql:host=localhost; dbname=featherz", "homestead", "secret", $options);
-		} catch (PDOException $e) {
-			// echo "Database Connection Error: ". $e->getMessage();
-			$error = $e->getMessage();
-			echo $error;
-		}
-		$first_name = "";
+	// public function getTestDB(){
+	// 	$options = array(
+	// 		PDO::ATTR_PERSISTENT => true,
+	// 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	// 	);
+	// 	try {
+	// 		$conn = new PDO("mysql:host=localhost; dbname=featherz", "homestead", "secret", $options);
+	// 	} catch (PDOException $e) {
+	// 		// echo "Database Connection Error: ". $e->getMessage();
+	// 		$error = $e->getMessage();
+	// 		echo $error;
+	// 	}
+	// 	$first_name = "";
 
-		$sql = "
-			SELECT * from users
-		";
+	// 	$sql = "
+	// 		SELECT * from users
+	// 	";
 
-		$stmt = $conn->prepare($sql);
-		$stmt->execute();
+	// 	$stmt = $conn->prepare($sql);
+	// 	$stmt->execute();
 
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	// 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		echo "<pre>";
-		print_r($rows);
-		echo "</pre>";
-	}
+	// 	echo "<pre>";
+	// 	print_r($rows);
+	// 	echo "</pre>";
+	// }
 }
