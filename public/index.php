@@ -13,7 +13,16 @@ if (is_callable(array($controller, $method))) {
 	call_user_func_array(array($object, $method), array($match['params']));
 }else{
 	echo "Cannot find $controller -> $method";
-	exit;
+	exit();
 }
+
+// $match = $router->match();
+
+// if ($match && is_callable($match['target'])) {
+// 	call_user_func_array($match['target'], $match['params']);
+// }else{
+// 	// no matching route found!
+// 	header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+// }
 
  
