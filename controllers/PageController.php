@@ -26,7 +26,10 @@ class PageController {
 		include(__DIR__ . "/../views/login.php");
 	}
 
-	// public function getTestDB(){
+	public function getTestDB(){
+	/********************/
+	// WITHOUT ELOQUENT example
+	/********************/
 	// 	$options = array(
 	// 		PDO::ATTR_PERSISTENT => true,
 	// 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -49,8 +52,11 @@ class PageController {
 
 	// 	$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-	// 	echo "<pre>";
-	// 	print_r($rows);
-	// 	echo "</pre>";
-	// }
+	// -----------------------------------------------
+	/*WITH ELOQUENT example*/
+	$user = User::find(1);
+
+	echo $user->first_name . " " . $user->last_name;
+	
+	}
 }

@@ -13,6 +13,6 @@
         "altorouter/altorouter": "^2.0"
     },
     "autoload": {
-        "classmap": ["controllers/"]
+        "classmap": ["controllers/", "models/"]
     }
 }

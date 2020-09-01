@@ -3,12 +3,13 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule;
 
+
 $capsule->addConnection([
-	'driver' 	=> getenv('DB_DRIVER'),
-	'host' 		=> getenv('DB_HOST'),
-	'database' 	=> getenv('DB_DATABASE'),
-	'username' 	=> getenv('DB_USER'),
-	'password' 	=> getenv('DB_PASS'),
+	'driver' 	=> $_ENV['DB_DRIVER'],
+	'host' 		=> $_ENV['DB_HOST'],
+	'database' 	=> $_ENV['DB_DATABASE'],
+	'username' 	=> $_ENV['DB_USER'],
+	'password' 	=> $_ENV['DB_PASS'],
 	'charset' 	=> 'utf8',
 	'collation' => 'utf8_unicode_ci',
 	'prefix'	=> ''
