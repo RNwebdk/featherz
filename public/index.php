@@ -3,18 +3,29 @@ include(__DIR__ . "/../bootstrap/start.php");
 include(__DIR__ . "/../bootstrap/db.php");
 include(__DIR__ . "/../routes.php");
 
+// Target = Controller + method
+// Params = id
+
 $match = $router->match();
+echo "<pre>";
+print_r($match);
+echo "</pre>";
 
+if ($match) {
+	list($controller, $method) = explode("@", $match['target']);
 
-list($controller, $method) = explode("@", $match['target']);
-
-if (is_callable(array($controller, $method))) {
-	$object = new $controller();
-	call_user_func_array(array($object, $method), array($match['params']));
+	if (is_callable(array($controller, $method))) {
+		$object = new $controller();
+		call_user_func_array(array($object, $method), array($match['params']));
+	}else{
+		echo "Cannot find $controller -> $method";
+		exit();
+	}	
 }else{
-	echo "Cannot find $controller -> $method";
-	exit();
+	//if page is not found, redirect to error 404
+	call_user_func_array([new PageController(), "error404"], []);
 }
+
 
 // $match = $router->match();
 

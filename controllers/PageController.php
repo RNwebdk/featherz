@@ -26,6 +26,10 @@ class PageController {
 		include(__DIR__ . "/../views/login.php");
 	}
 
+	public function error404(){
+		include(__DIR__ . "/../views/error404.php");
+	}
+
 	public function getTestDB(){
 	/********************/
 	// WITHOUT ELOQUENT example
