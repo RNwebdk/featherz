@@ -10,7 +10,8 @@
         "filp/whoops": "^2.7",
         "vlucas/phpdotenv": "^5.1",
         "illuminate/database": "^7.26",
-        "altorouter/altorouter": "^2.0"
+        "altorouter/altorouter": "^2.0",
+        "respect/validation": "^2.0"
     },
     "autoload": {
         "classmap": ["controllers/", "models/"]
