@@ -1,4 +1,5 @@
 <?php
+use Respect\Validation\Validator as Validator;
 
 class PageController {
 	
@@ -13,6 +14,34 @@ class PageController {
 
 	public function postShowRegisterPage(){
 		// validate data
+		$errors = [];
+		if(!Validator::stringVal()->length(3)->validate($_REQUEST['first_name'])){
+			$errors[] = "first name must at least three characters long!";
+		}
+
+		if(!Validator::stringVal()->length(3)->validate($_REQUEST['last_name'])){
+			$errors[] = "Last name must at least three characters long!";
+		}
+
+		if(!Validator::email()->validate($_REQUEST['email'])){
+			$errors[] = "You must enter a valid email address!";
+		}
+
+		if(!Validator::stringVal()->length(3)->validate($_REQUEST['password'])){
+			$errors[] = "Password must be at least three characters long!";
+		}
+
+		if(!Validator::equals($_REQUEST['email'])->validate($_REQUEST['verify_email'])){
+			$errors[] = "Email and verify email do not match!";
+		}
+
+		if(!Validator::equals($_REQUEST['password'])->validate($_REQUEST['verify_password'])){
+			$errors[] = "password and verify password do not match!";
+		}
+		echo "<pre>";
+		print_r($errors);
+		echo "</pre>";
+		die();
 
 		// if validation fails, go back to register
 		// page and display error messages

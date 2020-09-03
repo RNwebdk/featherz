@@ -7,9 +7,9 @@ include(__DIR__ . "/../routes.php");
 // Params = id
 
 $match = $router->match();
-echo "<pre>";
-print_r($match);
-echo "</pre>";
+// echo "<pre>";
+// print_r($match);
+// echo "</pre>";
 
 if ($match) {
 	list($controller, $method) = explode("@", $match['target']);
