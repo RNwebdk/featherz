@@ -14,6 +14,6 @@
         "respect/validation": "^2.0"
     },
     "autoload": {
-        "classmap": ["controllers/", "models/"]
+        "psr-4": { "Acme\\": "src/" }
     }
 }

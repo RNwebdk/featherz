@@ -1,14 +1,14 @@
-<?php
+<?php namespace Acme\Controllers;
 use Respect\Validation\Validator as Validator;
 
 class PageController {
 	
 	public function getShowHomePage(){
-		include(__DIR__ . "/../views/home.php");
+		include(__DIR__ . "/../../views/home.php");
 	}
 
 	public function getShowRegisterPage(){
-		include(__DIR__ . "/../views/register.php");
+		include(__DIR__ . "/../../views/register.php");
 	}
 
 
@@ -52,11 +52,11 @@ class PageController {
 	}
 
 	public function getShowLoginPage(){
-		include(__DIR__ . "/../views/login.php");
+		include(__DIR__ . "/../../views/login.php");
 	}
 
 	public function error404(){
-		include(__DIR__ . "/../views/error404.php");
+		include(__DIR__ . "/../../views/error404.php");
 	}
 
 	public function getTestDB(){
