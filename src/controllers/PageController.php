@@ -40,7 +40,7 @@ class PageController {
 		$user->first_name = $_REQUEST['first_name'];
 		$user->last_name = $_REQUEST['last_name'];
 		$user->email = $_REQUEST['email'];
-		$user->password = $_REQUEST['password'];
+		$user->password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
 		$user->save();
 
 		// save this data into a database
