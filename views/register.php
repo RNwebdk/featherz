@@ -15,6 +15,19 @@
 				</div>
 
 				<div class="col-md-10">
+					<?php if (isset($_SESSION['msg'])): ?>
+
+						<div class="alert alert-danger" role="alert">
+							<ul>
+								<?php foreach ($_SESSION['msg'] as $name => $value): ?>
+									<li><?php echo $value; ?></li>
+								<?php endforeach ?>
+							</ul>
+						</div>
+						
+						<?php unset($_SESSION['msg']); ?>
+						
+					<?php endif ?>
 					<h1>Register</h1>
 					<hr>
 

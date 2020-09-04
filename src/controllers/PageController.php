@@ -24,27 +24,31 @@ class PageController {
 			'password' => 'min:3|equalTo:verify_password'
 		];
 
-		// if validation fails, go back to register
-		// page and display error messages
+		
 
 		$validator = new Validator;
 
 		$errors = $validator->isValid($validationData);
 
-		echo "<pre>";
-		print_r($errors);
-		echo "</pre>";
-		exit();
+		// if validation fails, go back to register
+		// page and display error messages
+		// if there's errors, show them on screen
+		if (sizeOf($errors) > 0) {
+			$_SESSION['msg'] = $errors;
+			header("Location: /register");
+			exit();
+		}else{
+			$user = new User;
+			$user->first_name = $_REQUEST['first_name'];
+			$user->last_name = $_REQUEST['last_name'];
+			$user->email = $_REQUEST['email'];
+			$user->password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
+			// save this data into a database
+			$user->save();
 
-		$user = new User;
-		$user->first_name = $_REQUEST['first_name'];
-		$user->last_name = $_REQUEST['last_name'];
-		$user->email = $_REQUEST['email'];
-		$user->password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
-		$user->save();
+			echo "User created!";
+		}
 
-		// save this data into a database
-		echo "POSTED!";
 	}
 
 	public function getShowLoginPage(){
