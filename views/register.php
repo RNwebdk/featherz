@@ -18,7 +18,7 @@
 					<h1>Register</h1>
 					<hr>
 
-					<form class="form-horizontal" id="registerform" action="/register" method="post">
+					<form class="form-horizontal" id="registerform" action="/register" method="post" novalidate>
 
 						<div class="form-group">
 							<label for="first_name" class="col-sm-2 control-label">First Name</label>
