@@ -1,62 +1,19 @@
-<?php namespace Acme\Controllers;
+<?php 
+
+namespace Acme\Controllers;
 
 use Acme\Models\User;
-use Acme\Validation\Validator;
 
-class PageController {
+class PageController extends BaseController {
 	
 	public function getShowHomePage(){
-		include(__DIR__ . "/../../views/home.php");
-	}
-
-	public function getShowRegisterPage(){
-		include(__DIR__ . "/../../views/register.php");
-	}
-
-
-	public function postShowRegisterPage(){
-		// validate data
-		$validationData = [
-			'first_name' => 'min:3',
-			'last_name' => 'min:3',
-			'email' => 'email|equalTo:verify_email',
-			'verify_email' => 'email',
-			'password' => 'min:3|equalTo:verify_password'
-		];
-
-		
-
-		$validator = new Validator;
-
-		$errors = $validator->isValid($validationData);
-
-		// if validation fails, go back to register
-		// page and display error messages
-		// if there's errors, show them on screen
-		if (sizeOf($errors) > 0) {
-			$_SESSION['msg'] = $errors;
-			header("Location: /register");
-			exit();
-		}else{
-			$user = new User;
-			$user->first_name = $_REQUEST['first_name'];
-			$user->last_name = $_REQUEST['last_name'];
-			$user->email = $_REQUEST['email'];
-			$user->password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
-			// save this data into a database
-			$user->save();
-
-			echo "User created!";
-		}
-
-	}
-
-	public function getShowLoginPage(){
-		include(__DIR__ . "/../../views/login.php");
+		// include(__DIR__ . "/../../views/home.php");
+		echo $this->twig->render('home.html');
 	}
 
 	public function error404(){
-		include(__DIR__ . "/../../views/error404.php");
+		// include(__DIR__ . "/../../views/error404.php");
+		echo $this->twig->render('error404.html');
 	}
 
 	public function getTestDB(){

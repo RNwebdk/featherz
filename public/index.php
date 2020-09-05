@@ -23,7 +23,7 @@ if ($match) {
 	}	
 }else{
 	//if page is not found, redirect to error 404
-	call_user_func_array([new PageController(), "error404"], []);
+	call_user_func_array([new \Acme\Controllers\PageController(), "error404"], []);
 }
 
 
