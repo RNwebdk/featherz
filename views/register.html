@@ -8,19 +8,17 @@
 			</div>
 
 			<div class="col-md-10">
-				<?php if (isset($_SESSION['msg'])): ?>
 
+				
+				{% if session.msg %}
 					<div class="alert alert-danger" role="alert">
 						<ul>
-							<?php foreach ($_SESSION['msg'] as $name => $value): ?>
-								<li><?php echo $value; ?></li>
-							<?php endforeach ?>
+							{% for error in session.msg %}
+	        					<li>{{error}}</li>
+	    					{% endfor %}
 						</ul>
 					</div>
-					
-					<?php unset($_SESSION['msg']); ?>
-					
-				<?php endif ?>
+				{% endif %}
 				<h1>Register</h1>
 				<hr>
 
@@ -81,6 +79,6 @@
 
 {% block bottomjs %}
 	<script>
-			alert("this should only show up on the register page");
+			// alert("this should only show up on the register page");
 	</script>
 {% endblock %}

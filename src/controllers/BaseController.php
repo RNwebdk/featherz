@@ -14,6 +14,7 @@ class BaseController {
 		$this->twig = new \Twig\Environment($this->loader, [
 		    'cache' => false, 'debug' => true
 		]);
+		$this->twig->addGlobal('session', $_SESSION);
 	}
 
 }

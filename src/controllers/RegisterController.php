@@ -9,11 +9,15 @@ class RegisterController extends BaseController {
 
 	public function getShowRegisterPage(){
 		// include(__DIR__ . "/../../views/register.php");
+		// clear previous errors, if there's any
+		unset($_SESSION['msg']);
 		echo $this->twig->render('register.html');
 	}
 
 
 	public function postShowRegisterPage(){
+		// clear previous errors, if there's any
+		unset($_SESSION['msg']);
 		// validate data
 		$validationData = [
 			'first_name' => 'min:3',
