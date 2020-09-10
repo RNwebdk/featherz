@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+@extends('base')
 
-	{% block browsertitle %}
-	Register
-	{% endblock %}
+@section('browsertitle')
+Register
+@endsection
 
-{% block content %}
+@section('maincontent')
 
 		<div class="row">
 			<div class="col-md-2">
@@ -14,15 +14,15 @@
 			<div class="col-md-10">
 
 				
-				{% if session.msg %}
+				@if (isset($_SESSION['msg']))
 					<div class="alert alert-danger" role="alert">
 						<ul>
-							{% for error in session.msg %}
-	        					<li>{{error}}</li>
-	    					{% endfor %}
+							@foreach($_SESSION['msg'] as $error)
+	        					<li>{{$error}}</li>
+	    					@endforeach
 						</ul>
 					</div>
-				{% endif %}
+				@endif
 				<h1>Register</h1>
 				<hr>
 
@@ -79,10 +79,10 @@
 				</form>
 			</div>
 		</div>
-{% endblock %}
+@endsection
 
-{% block bottomjs %}
+@section('bottomjs')
 	<script>
 			// alert("this should only show up on the register page");
 	</script>
-{% endblock %}
+@endsection

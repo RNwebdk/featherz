@@ -10,8 +10,9 @@ class RegisterController extends BaseController {
 	public function getShowRegisterPage(){
 		// include(__DIR__ . "/../../views/register.php");
 		// clear previous errors, if there's any
+		
+		echo $this->blade->render('register');
 		unset($_SESSION['msg']);
-		echo $this->twig->render('register.html');
 	}
 
 
@@ -56,7 +57,7 @@ class RegisterController extends BaseController {
 
 	public function getShowLoginPage(){
 		// include(__DIR__ . "/../../views/login.php");
-		echo $this->twig->render('login.html');
+		echo $this->blade->render('login');
 	}
 
 }

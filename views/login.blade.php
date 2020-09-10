@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+@extends('base')
 
-	{% block browsertitle %}
-	Login
-	{% endblock %}
+@section('browsertitle')
+Login
+@endsection
 
-{% block content %}
+@section('maincontent')
 	<h1>Login page</h1>
 	<hr>
 	<form class="form-horizontal" action="#" method="post">
@@ -26,10 +26,10 @@
 			</div>
 		</div>
 	</form>
-{% endblock %}
+@endsection
 
-{% block bottomjs %}
+@section('bottomjs')
 	<script>
 			alert("this should only show up on the Login page");
 	</script>
-{% endblock %}
+@endsection

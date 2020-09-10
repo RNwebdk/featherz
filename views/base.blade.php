@@ -5,22 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<title>
-		{% block browsertitle %}
-		{% endblock %}
+		@yield('browsertitle')
 	</title>
 </head>
 <body>
-	{% include 'nav.html' %}
+	@include('nav')
 	<div class="container">
-		{% block content %}
-		{% endblock %}
+		@yield('maincontent')
 	</div>
 
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-	{% block bottomjs %}
-	{% endblock %}
+	@yield('bottomjs')
 </body>
 </html>

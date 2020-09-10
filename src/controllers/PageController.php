@@ -3,17 +3,21 @@
 namespace Acme\Controllers;
 
 use Acme\Models\User;
+use duncan3dc\Laravel\BladeInstance;
+
 
 class PageController extends BaseController {
 	
 	public function getShowHomePage(){
 		// include(__DIR__ . "/../../views/home.php");
-		echo $this->twig->render('home.html');
+		// echo $this->twig->render('home.html');
+
+		echo $this->blade->render("home");
 	}
 
 	public function error404(){
 		// include(__DIR__ . "/../../views/error404.php");
-		echo $this->twig->render('error404.html');
+		echo $this->blade->render('error404');
 	}
 
 	public function getTestDB(){
