@@ -5,7 +5,8 @@ $router->map('GET', '/', 'Acme\Controllers\PageController@getShowHomePage', 'hom
 $router->map('GET', '/register', 'Acme\Controllers\RegisterController@getShowRegisterPage', 'register');
 $router->map('POST', '/register', 'Acme\Controllers\RegisterController@postShowRegisterPage', 'register_post');
 $router->map('GET', '/login', 'Acme\Controllers\RegisterController@getShowLoginPage', 'login');
-$router->map('GET', '/mango', 'Acme\Controllers\PageController@ost', 'mango');
+
+$router->map('GET', '/about', 'Acme\Controllers\PageController@getShowPage', 'generic_page');
 
 // test route
 $router->map('GET', '/testdb', 'Acme\Controllers\PageController@getTestDB', 'testdb');
