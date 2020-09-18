@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('browsertitle')
-Error 404
+	Error 404 Page not found
 @endsection
 
 @section('maincontent')

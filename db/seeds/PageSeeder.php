@@ -3,7 +3,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class UserSeeder extends AbstractSeed
+class PageSeeder extends AbstractSeed
 {
     /**
      * Run Method.
@@ -15,11 +15,6 @@ class UserSeeder extends AbstractSeed
      */
     public function run()
     {
-        $password_hash = password_hash('verysecret', PASSWORD_DEFAULT);
-
-
-        $this->execute("INSERT INTO users (first_name, last_name, email, password)
-            VALUES('John', 'Doe', 'me@here.ca', '$password_hash')
-        ");
+        $this->execute("INSERT INTO pages (browser_title, page_content)VALUES('About', 'About text')");
     }
 }

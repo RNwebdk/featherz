@@ -23,8 +23,8 @@ final class CreateUserTable extends AbstractMigration
 
 
     public function up(){
-        $users = $this->table('users');
-        $users->addColumn('first_name', 'string')
+        $table = $this->table('users');
+        $table->addColumn('first_name', 'string')
               ->addColumn('last_name', 'string')
               ->addColumn('email', 'string')
               ->addColumn('password', 'string')
@@ -35,6 +35,6 @@ final class CreateUserTable extends AbstractMigration
     }
 
     public function down(){
-        $this->dropTable('users');
+        $this->table('users')->drop()->save();
     }
 }

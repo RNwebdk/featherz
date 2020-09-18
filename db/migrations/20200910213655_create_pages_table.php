@@ -22,8 +22,8 @@ final class CreatePagesTable extends AbstractMigration
     // }
 
     public function up(){
-        $users = $this->table('pages');
-        $users->addColumn('browser_title', 'string')
+        $table = $this->table('pages');
+        $table->addColumn('browser_title', 'string')
               ->addColumn('page_content', 'text')
               ->addColumn('create_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('updated_at', 'datetime', ['null' => true])
@@ -32,6 +32,6 @@ final class CreatePagesTable extends AbstractMigration
     }
 
     public function down(){
-        $this->dropTable('pages');
+        $this->table('pages')->drop()->save();
     }
 }
