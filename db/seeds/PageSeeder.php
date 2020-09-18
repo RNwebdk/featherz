@@ -15,6 +15,7 @@ class PageSeeder extends AbstractSeed
      */
     public function run()
     {
-        $this->execute("INSERT INTO pages (browser_title, page_content)VALUES('About', 'About text')");
+        $this->execute("INSERT INTO pages (browser_title, page_content, slug)VALUES('About', '<h1>About</h1><p>About this company</p>', 'about-acme')");
+        $this->execute("INSERT INTO pages (browser_title, page_content, slug)VALUES('Success', '<h1>Success</h1><p>Successfully registered</p>', 'success')");
     }
 }

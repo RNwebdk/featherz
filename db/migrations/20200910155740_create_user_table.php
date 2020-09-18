@@ -28,7 +28,7 @@ final class CreateUserTable extends AbstractMigration
               ->addColumn('last_name', 'string')
               ->addColumn('email', 'string')
               ->addColumn('password', 'string')
-              ->addColumn('create_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
+              ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
               ->addColumn('updated_at', 'datetime', ['null' => true])
               ->create();
 

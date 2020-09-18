@@ -50,14 +50,10 @@ class RegisterController extends BaseController {
 			// save this data into a database
 			$user->save();
 
-			echo "User created!";
+			header("Location: /success");
+			exit();
 		}
 
-	}
-
-	public function getShowLoginPage(){
-		// include(__DIR__ . "/../../views/login.php");
-		echo $this->blade->render('login');
 	}
 
 }

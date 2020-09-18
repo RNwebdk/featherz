@@ -1,9 +1,7 @@
 <?php 
-
-session_start();
-
 // Composer packages
 require(__DIR__ . "/../vendor/autoload.php");
+session_start();
 
 // Implement environmen gloabal veriables 
 Dotenv\Dotenv::createImmutable(__DIR__, "/../.env")->load();
