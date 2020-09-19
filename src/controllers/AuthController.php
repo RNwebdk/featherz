@@ -30,6 +30,11 @@ class AuthController extends BaseController {
 			$validation_success = false;
 		}
 
+		if ($user->active == 0) {
+			// tjek if user activated account
+			$validation_success = false;
+		}
+
 		// if valid, log user in
 		if ($validation_success) {
 			$_SESSION['user'] = $user;
