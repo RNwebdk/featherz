@@ -12,11 +12,29 @@
 			<li class="nav-item"><a class="nav-link" href="/testimonials">Testimonials</a></li>
 			@if(Acme\auth\LoggedIn::user())
 				<li class="nav-item"><a href="/add-testimonial" class="nav-link">Add a Testimonial</a></li>
-				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
-			@else
-				<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 			@endif
-			<!-- <li class="nav-item"><a class="nav-link" href="/testdb">Database</a></li> -->
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			@if(Acme\auth\LoggedIn::user())
+				<div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    Admin
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				    <a class="dropdown-item" href="#">Edit page</a>
+<!-- 				    <hr>
+				    <a class="dropdown-item" href="#">Another action</a>
+				    <a class="dropdown-item" href="#">Something else here</a> -->
+				  </div>
+				</div>
+				<li class="nav-item">
+					<a href="/logout" class="nav-link"><span class="glypicon glypicon-lock" aria-hidden="true"></span>Logout</a>
+				</li>
+			@else
+				<li class="nav-item">
+					<a href="/login" class="nav-link"><span class="glypicon glypicon-lock" aria-hidden="true"></span>Login</a>
+				</li>
+			@endif
 		</ul>
 	</div>
 </nav>
