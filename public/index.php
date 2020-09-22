@@ -11,7 +11,7 @@ include(__DIR__ . "/../routes.php");
 
 $match = $router->match();
 
-
+// dd($match);
 if (is_string($match['target'])) {
 	list($controller, $method) = explode("@", $match['target']);
 

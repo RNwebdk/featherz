@@ -9,8 +9,10 @@
 			<li class="nav-item active"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></li>
 			<li class="nav-item"><a class="nav-link" href="/about-acme">About</a></li>
 			<li class="nav-item"><a class="nav-link" href="/register">register</a></li>
+			<li class="nav-item"><a class="nav-link" href="/testimonials">Testimonials</a></li>
 			@if(Acme\auth\LoggedIn::user())
-				<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+				<li class="nav-item"><a href="/add-testimonial" class="nav-link">Add a Testimonial</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
 			@else
 				<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 			@endif

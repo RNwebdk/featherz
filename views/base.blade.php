@@ -11,6 +11,10 @@
 <body>
 	@include('nav')
 	<div class="container">
+		<div class="row">
+	        <br><br>
+	        @include('errormessage')
+	    </div>
 		@yield('maincontent')
 	</div>
 

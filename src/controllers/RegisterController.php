@@ -53,13 +53,13 @@ class RegisterController extends BaseController {
 			$user->save();
 
 			$token = md5(uniqid(random(), true)) . md5(uniqid(random(), true));
-			$user_pending = new UserPending;			
+			$user_pending = new UserPending();			
 			$user_pending->token = $token;
 			$user_pending->user_id = $user->id;
 			$user_pending->save();
 
 			$message = $this->blade->render('emails.welcome-email', ['token' => $token]);
-			SendEmail::sendEmail(['Morten@gmail.com' => $user->first_name . ' ' . $user->last_name], 'Welcome to Acme', $message);
+			SendEmail::sendEmail([$user->email => $user->first_name . ' ' . $user->last_name], 'Welcome to Acme', $message);
 
 			header("Location: /success");
 			exit();
@@ -72,7 +72,7 @@ class RegisterController extends BaseController {
 		$token = $_GET['token'];
 
 		// look up the token
-		$user_pending = UserPending::where('token' '=', $token)->get();
+		$user_pending = UserPending::where('token', '=', $token)->get();
 
 		foreach ($user_pending as $item) {
 			$user_id = $item->user_id;
