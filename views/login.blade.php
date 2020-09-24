@@ -32,6 +32,7 @@ Login
 		</div>
 		<div class="form-group">
 			<div class="col-sm-10">
+				<input type="hidden" name="_token" value="{{$CSRF}}">
 				<button type="submit" class="btn btn-primary">Sign in</button>
 			</div>
 		</div>

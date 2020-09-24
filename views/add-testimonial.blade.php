@@ -24,6 +24,7 @@
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
+				<input type="hidden" name="_token" value="{{$CSRF}}">
 				<button type="submit" class="btn btn-primary">Save Testimonial</button>
 			</div>
 		</div>

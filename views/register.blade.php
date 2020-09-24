@@ -62,6 +62,7 @@ Register
 					<hr>
 					<div class="form-group">
 						<div class="col-sm-10">
+							<input type="hidden" name="_token" value="{{$CSRF}}">
 							<input type="submit" value="Register" class="btn btn-primary">
 						</div>
 					</div>

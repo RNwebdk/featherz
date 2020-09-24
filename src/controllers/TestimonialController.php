@@ -4,7 +4,8 @@ namespace Acme\Controllers;
 
 use Acme\Models\User;
 use Acme\Models\Testimonial;
-use Acme\Validation\Validator;
+use Acme\Helpers\Validator;
+use Acme\Helpers\Token;
 use Acme\Auth\LoggedIn;
 
 class TestimonialController extends BaseController {
@@ -18,37 +19,48 @@ class TestimonialController extends BaseController {
 	}
 
 	public function getShowAdd(){
-		echo $this->blade->render('add-testimonial');
+		$token = Token::generate();
+
+		$data = [
+			'CSRF' => $token
+		];
+
+		echo $this->blade->render('add-testimonial', $data);
 	}
 
 
 	public function postShowAdd(){
+		if(Token::check($_REQUEST['_token'])){
+			$errors = [];
 
-		$errors = [];
+			$validation_rules = [
+				'title' => 'min:3',
+				'testimonial' => 'min:10'
+			];
 
-		$validation_rules = [
-			'title' => 'min:3',
-			'testimonial' => 'min:10'
-		];
+			$validator = new Validator;
 
-		$validator = new Validator;
+			$errors = $validator->isValid($validation_rules);
+			if (sizeof($errors) > 0) {
+				$_SESSION['msg'] = $errors;
+				echo $this->blade->render('add-testimonial');
+				unset($_SESSION['msg']);
+				exit();
+			}
 
-		$errors = $validator->isValid($validation_rules);
-		if (sizeof($errors) > 0) {
-			$_SESSION['msg'] = $errors;
-			echo $this->blade->render('add-testimonial');
-			unset($_SESSION['msg']);
+			$testimonial = new Testimonial();
+			$testimonial->title = $_REQUEST['title'];
+			$testimonial->testimonial = $_REQUEST['testimonial'];
+			$testimonial->user_id = LoggedIn::user()->id;
+			$testimonial->save();
+
+			header("Location: /testimonial-saved");
+			exit;
+		}else{
+			// CSRF didn't pass
+			header("Location: /add-testimonial");
 			exit();
 		}
-
-		$testimonial = new Testimonial();
-		$testimonial->title = $_REQUEST['title'];
-		$testimonial->testimonial = $_REQUEST['testimonial'];
-		$testimonial->user_id = LoggedIn::user()->id;
-		$testimonial->save();
-
-		header("Location: /testimonial-saved");
-		exit;
 
 	}
 

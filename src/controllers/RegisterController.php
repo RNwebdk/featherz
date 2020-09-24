@@ -4,16 +4,22 @@ namespace Acme\Controllers;
 
 use Acme\Models\User;
 use Acme\Models\UserPending;
-use Acme\Validation\Validator;
-use Acme\Email\SendEmail;
+use Acme\Helpers\Validator;
+use Acme\Helpers\SendEmail;
+use Acme\Helpers\Token;
+use Acme\Helpers\Session;
 
 class RegisterController extends BaseController {
 
 	public function getShowRegisterPage(){
-		// include(__DIR__ . "/../../views/register.php");
-		// clear previous errors, if there's any
+
+		$token = Token::generate();
+
+		$data = [
+			'CSRF' => $token
+		];
 		
-		echo $this->blade->render('register');
+		echo $this->blade->render('register', $data);
 		unset($_SESSION['msg']);
 	}
 
@@ -21,47 +27,53 @@ class RegisterController extends BaseController {
 	public function postShowRegisterPage(){
 		// clear previous errors, if there's any
 		unset($_SESSION['msg']);
-		// validate data
-		$validationData = [
-			'first_name' => 'min:3',
-			'last_name' => 'min:3',
-			'email' => 'email|equalTo:verify_email|unique:User',
-			'verify_email' => 'email',
-			'password' => 'min:3|equalTo:verify_password'
-		];
+		if(Token::check($_REQUEST['_token'])){
+			// validate data
+			$validationData = [
+				'first_name' => 'min:3',
+				'last_name' => 'min:3',
+				'email' => 'email|equalTo:verify_email|unique:User',
+				'verify_email' => 'email',
+				'password' => 'min:3|equalTo:verify_password'
+			];
 
-		
+			
 
-		$validator = new Validator;
+			$validator = new Validator;
 
-		$errors = $validator->isValid($validationData);
+			$errors = $validator->isValid($validationData);
 
-		// if validation fails, go back to register
-		// page and display error messages
-		// if there's errors, show them on screen
-		if (sizeOf($errors) > 0) {
-			$_SESSION['msg'] = $errors;
-			header("Location: /register");
-			exit();
+			// if validation fails, go back to register
+			// page and display error messages
+			// if there's errors, show them on screen
+			if (sizeOf($errors) > 0) {
+				$_SESSION['msg'] = $errors;
+				header("Location: /register");
+				exit();
+			}else{
+				$user = new User;
+				$user->first_name = $_REQUEST['first_name'];
+				$user->last_name = $_REQUEST['last_name'];
+				$user->email = $_REQUEST['email'];
+				$user->password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
+				// save this data into a database
+				$user->save();
+
+				$token = md5(uniqid(random(), true)) . md5(uniqid(random(), true));
+				$user_pending = new UserPending();			
+				$user_pending->token = $token;
+				$user_pending->user_id = $user->id;
+				$user_pending->save();
+
+				$message = $this->blade->render('emails.welcome-email', ['token' => $token]);
+				SendEmail::sendEmail([$user->email => $user->first_name . ' ' . $user->last_name], 'Welcome to Acme', $message);
+
+				header("Location: /success");
+				exit();
+			}
 		}else{
-			$user = new User;
-			$user->first_name = $_REQUEST['first_name'];
-			$user->last_name = $_REQUEST['last_name'];
-			$user->email = $_REQUEST['email'];
-			$user->password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
-			// save this data into a database
-			$user->save();
-
-			$token = md5(uniqid(random(), true)) . md5(uniqid(random(), true));
-			$user_pending = new UserPending();			
-			$user_pending->token = $token;
-			$user_pending->user_id = $user->id;
-			$user_pending->save();
-
-			$message = $this->blade->render('emails.welcome-email', ['token' => $token]);
-			SendEmail::sendEmail([$user->email => $user->first_name . ' ' . $user->last_name], 'Welcome to Acme', $message);
-
-			header("Location: /success");
+			// CSRF didn't pass
+			header("Location: /register");
 			exit();
 		}
 
