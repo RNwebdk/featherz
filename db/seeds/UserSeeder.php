@@ -18,8 +18,12 @@ class UserSeeder extends AbstractSeed
         $password_hash = password_hash('verysecret', PASSWORD_DEFAULT);
 
 
-        $this->execute("INSERT INTO users (first_name, last_name, email, password)
-            VALUES('John', 'Doe', 'me@here.ca', '$password_hash')
+        $this->execute("INSERT INTO users (first_name, last_name, email, password, active, access_level)
+            VALUES('Admin', 'Istrator', 'admin@admin.com', '$password_hash', '1', '1')
+        ");
+
+        $this->execute("INSERT INTO users (first_name, last_name, email, password, active, access_level)
+            VALUES('Regular', 'User', 'regular@user.com', '$password_hash', '1', '2')
         ");
     }
 }

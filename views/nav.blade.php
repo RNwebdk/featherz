@@ -15,7 +15,7 @@
 			@endif
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			@if(Acme\auth\LoggedIn::user())
+			@if ((Acme\Auth\Loggedin::user()) && (Acme\Auth\Loggedin::user()->access_level == 1)) {
 				<div class="dropdown">
 				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Admin
@@ -27,6 +27,7 @@
 				    <a class="dropdown-item" href="#">Something else here</a> -->
 				  </div>
 				</div>
+			@elseif (Acme\auth\LoggedIn::user())
 				<li class="nav-item">
 					<a href="/logout" class="nav-link"><span class="glypicon glypicon-lock" aria-hidden="true"></span>Logout</a>
 				</li>
