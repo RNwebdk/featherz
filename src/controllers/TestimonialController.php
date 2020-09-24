@@ -58,7 +58,7 @@ class TestimonialController extends BaseController {
 			exit;
 		}else{
 			// CSRF didn't pass
-			header("Location: /add-testimonial");
+			header('HTTP/1.0 400 Bad Request');
 			exit();
 		}
 

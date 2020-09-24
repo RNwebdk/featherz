@@ -49,7 +49,13 @@ class AuthController extends BaseController {
 				exit();
 			}else{
 				$_SESSION['msg'] = ["Invalid login"];
-				echo $this->blade->render('login');
+				$token = Token::generate();
+
+				$data = [
+					'CSRF' => $token
+				];
+
+				echo $this->blade->render('login', $data);
 				unset($_SESSION['msg']);
 				exit();
 			}
@@ -57,7 +63,7 @@ class AuthController extends BaseController {
 			// if not valid, redirect to login page with flash message
 		}else{
 			// CSRF didn't pass
-			header("Location: /login");
+			header('HTTP/1.0 400 Bad Request');
 			exit();
 		}
 	}

@@ -73,7 +73,7 @@ class RegisterController extends BaseController {
 			}
 		}else{
 			// CSRF didn't pass
-			header("Location: /register");
+			header('HTTP/1.0 400 Bad Request');
 			exit();
 		}
 
